@@ -25,6 +25,8 @@ SECRET_KEY = 'fn6$s_7%zobz+(9=&=wa8pnn*%pzw*ge$qk4o!o@=s!f-ys3e1'
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'core.CustomUser'
+
 
 # Application definition
 
