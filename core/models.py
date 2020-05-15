@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, Permis
 
 
 class CustomUserManager(BaseUserManager):
+	"""
+		Manager for Custom User
+	"""
 	def create_user(self, email, password, **extra_fields):
 		if not email:
 			raise ValueError(_('The email must be set'))
@@ -12,7 +15,6 @@ class CustomUserManager(BaseUserManager):
 		user.set_password(password)
 		user.is_active = False
 		user.is_staff = False
-		user.is_seller = False
 		user.save(using = self.db)
 		return user
 
@@ -26,7 +28,6 @@ class CustomUserManager(BaseUserManager):
 		user.set_password(password)
 		user.is_active = True
 		user.is_staff = True
-		user.is_seller = True
 		user.is_superuser = True
 		user.save(using = self.db)
 		return user
@@ -38,9 +39,11 @@ class CustomUserManager(BaseUserManager):
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
+	"""
+		Custom User model
+	"""
 	email = models.EmailField(max_length = 256, unique = True)
 	is_active = models.BooleanField(default = False)
-	is_seller = models.BooleanField(default = False)
 	is_staff = models.BooleanField(default = False)
 	name = models.CharField(max_length = 150, null = False, blank = False)
 
